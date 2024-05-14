@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_navigation_item_menus",
+  "info": {
+    "displayName": "Item Menu",
+    "icon": "link",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "custom_url": {
+      "type": "string"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

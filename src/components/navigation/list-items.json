@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_navigation_list_items",
+  "info": {
+    "displayName": "List Items",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "custom_url": {
+      "type": "string"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.item-menu"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_calculator_inputs",
+  "info": {
+    "displayName": "Input",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "radio",
+        "text",
+        "select"
+      ],
+      "default": "radio"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "uuid": {
+      "type": "customField",
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "relation_parent_uuid": {
+      "type": "string"
+    },
+    "relation_sibling_uuid": {
+      "type": "string"
+    }
+  }
+}

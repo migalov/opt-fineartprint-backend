@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_calculator_parameters",
+  "info": {
+    "displayName": "Parameter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "customField",
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "inputs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "form.input"
+    }
+  }
+}
