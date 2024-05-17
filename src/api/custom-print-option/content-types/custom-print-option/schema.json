@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_print_options",
+  "info": {
+    "singularName": "custom-print-option",
+    "pluralName": "custom-print-options",
+    "displayName": "Custom Print Option",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "calculator": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::calculator.calculator"
+    },
+    "parameters": {
+      "type": "component",
+      "repeatable": true,
+      "component": "calculator.parameter-checked"
+    }
+  }
+}

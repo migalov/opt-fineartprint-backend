@@ -376,8 +376,6 @@ export interface ApiCalculatorCalculator extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     slug: Attribute.String;
-    uuid: Attribute.UID &
-      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
     parameters: Attribute.Component<'calculator.parameter', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -390,6 +388,43 @@ export interface ApiCalculatorCalculator extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::calculator.calculator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCustomPrintOptionCustomPrintOption
+  extends Schema.CollectionType {
+  collectionName: 'custom_print_options';
+  info: {
+    singularName: 'custom-print-option';
+    pluralName: 'custom-print-options';
+    displayName: 'Custom Print Option';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    calculator: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'oneToOne',
+      'api::calculator.calculator'
+    >;
+    parameters: Attribute.Component<'calculator.parameter-checked', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
       'oneToOne',
       'admin::user'
     > &
@@ -435,6 +470,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     singularName: 'order';
     pluralName: 'orders';
     displayName: 'Order';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -442,13 +478,23 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   attributes: {
     uuid: Attribute.UID &
       Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
-    details: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'toolbar';
-        }
-      >;
+    custom_print_options: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::custom-print-option.custom-print-option'
+    >;
+    status: Attribute.Enumeration<
+      [
+        '\u0412 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0435',
+        '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D',
+        '\u041E\u043F\u043B\u0430\u0447\u0435\u043D',
+        '\u0413\u043E\u0442\u043E\u0432 \u043A \u0432\u044B\u0434\u0430\u0447\u0435',
+        '\u0412 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0435',
+        '\u041F\u043E\u043B\u0443\u0447\u0435\u043D',
+        '\u041E\u0442\u043C\u0435\u043D\u0435\u043D'
+      ]
+    >;
+    userID: Attribute.UID;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -907,6 +953,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::calculator.calculator': ApiCalculatorCalculator;
+      'api::custom-print-option.custom-print-option': ApiCustomPrintOptionCustomPrintOption;
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::order.order': ApiOrderOrder;
       'plugin::upload.file': PluginUploadFile;

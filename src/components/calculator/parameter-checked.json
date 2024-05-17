@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_calculator_parameter_checkeds",
+  "info": {
+    "displayName": "Parameter Checked",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}

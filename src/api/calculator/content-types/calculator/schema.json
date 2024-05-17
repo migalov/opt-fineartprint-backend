@@ -18,10 +18,6 @@
     "slug": {
       "type": "string"
     },
-    "uuid": {
-      "type": "customField",
-      "customField": "plugin::strapi-advanced-uuid.uuid"
-    },
     "parameters": {
       "type": "component",
       "repeatable": true,

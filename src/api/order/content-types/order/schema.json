@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,12 +16,25 @@
       "type": "customField",
       "customField": "plugin::strapi-advanced-uuid.uuid"
     },
-    "details": {
-      "type": "customField",
-      "options": {
-        "preset": "toolbar"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+    "custom_print_options": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::custom-print-option.custom-print-option"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "В производстве",
+        "Оформлен",
+        "Оплачен",
+        "Готов к выдаче",
+        "В доставке",
+        "Получен",
+        "Отменен"
+      ]
+    },
+    "userID": {
+      "type": "uid"
     }
   }
 }

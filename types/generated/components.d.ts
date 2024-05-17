@@ -1,5 +1,19 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface CalculatorParameterChecked extends Schema.Component {
+  collectionName: 'components_calculator_parameter_checkeds';
+  info: {
+    displayName: 'Parameter Checked';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    name: Attribute.String;
+    value: Attribute.String;
+    price: Attribute.Decimal;
+  };
+}
+
 export interface CalculatorParameter extends Schema.Component {
   collectionName: 'components_calculator_parameters';
   info: {
@@ -9,8 +23,6 @@ export interface CalculatorParameter extends Schema.Component {
   attributes: {
     title: Attribute.String;
     name: Attribute.String;
-    uuid: Attribute.UID &
-      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
     inputs: Attribute.Component<'form.input', true>;
   };
 }
@@ -28,8 +40,6 @@ export interface FormInput extends Schema.Component {
     type: Attribute.Enumeration<['radio', 'text', 'select']> &
       Attribute.DefaultTo<'radio'>;
     price: Attribute.Decimal;
-    uuid: Attribute.UID &
-      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
     relation_parent_uuid: Attribute.String;
     relation_sibling_uuid: Attribute.String;
   };
@@ -66,6 +76,7 @@ export interface NavigationListItems extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'calculator.parameter-checked': CalculatorParameterChecked;
       'calculator.parameter': CalculatorParameter;
       'form.input': FormInput;
       'navigation.item-menu': NavigationItemMenu;

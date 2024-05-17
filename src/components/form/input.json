@@ -27,10 +27,6 @@
     "price": {
       "type": "decimal"
     },
-    "uuid": {
-      "type": "customField",
-      "customField": "plugin::strapi-advanced-uuid.uuid"
-    },
     "relation_parent_uuid": {
       "type": "string"
     },
