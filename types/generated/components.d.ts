@@ -24,6 +24,7 @@ export interface CalculatorParameter extends Schema.Component {
     title: Attribute.String;
     name: Attribute.String;
     inputs: Attribute.Component<'form.input', true>;
+    dependsOn: Attribute.String;
   };
 }
 
@@ -40,8 +41,11 @@ export interface FormInput extends Schema.Component {
     type: Attribute.Enumeration<['radio', 'text', 'select']> &
       Attribute.DefaultTo<'radio'>;
     price: Attribute.Decimal;
-    relation_parent_uuid: Attribute.String;
-    relation_sibling_uuid: Attribute.String;
+    chainRelationships: Attribute.Relation<
+      'form.input',
+      'oneToMany',
+      'api::chain-relationship.chain-relationship'
+    >;
   };
 }
 

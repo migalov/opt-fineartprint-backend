@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chain_relationships",
+  "info": {
+    "singularName": "chain-relationship",
+    "pluralName": "chain-relationships",
+    "displayName": "Chain Relationship"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "value": {
+      "type": "integer"
+    }
+  }
+}

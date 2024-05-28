@@ -71,11 +71,27 @@
     "lastName": {
       "type": "string"
     },
-    "phone": {
-      "type": "string"
+    "uid": {
+      "type": "customField",
+      "customField": "plugin::strapi-advanced-uuid.uuid"
     },
-    "company": {
-      "type": "string"
+    "customPrintOptions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::custom-print-option.custom-print-option",
+      "mappedBy": "user"
+    },
+    "companies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company.company",
+      "mappedBy": "user"
+    },
+    "contacts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact.contact",
+      "mappedBy": "user"
     }
   }
 }

@@ -362,157 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCalculatorCalculator extends Schema.CollectionType {
-  collectionName: 'calculators';
-  info: {
-    singularName: 'calculator';
-    pluralName: 'calculators';
-    displayName: 'Calculator';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    slug: Attribute.String;
-    parameters: Attribute.Component<'calculator.parameter', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::calculator.calculator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::calculator.calculator',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCustomPrintOptionCustomPrintOption
-  extends Schema.CollectionType {
-  collectionName: 'custom_print_options';
-  info: {
-    singularName: 'custom-print-option';
-    pluralName: 'custom-print-options';
-    displayName: 'Custom Print Option';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    calculator: Attribute.Relation<
-      'api::custom-print-option.custom-print-option',
-      'oneToOne',
-      'api::calculator.calculator'
-    >;
-    parameters: Attribute.Component<'calculator.parameter-checked', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::custom-print-option.custom-print-option',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::custom-print-option.custom-print-option',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiNavigationNavigation extends Schema.CollectionType {
-  collectionName: 'navigations';
-  info: {
-    singularName: 'navigation';
-    pluralName: 'navigations';
-    displayName: 'Navigation';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    items: Attribute.Component<'navigation.list-items', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::navigation.navigation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::navigation.navigation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiOrderOrder extends Schema.CollectionType {
-  collectionName: 'orders';
-  info: {
-    singularName: 'order';
-    pluralName: 'orders';
-    displayName: 'Order';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    uuid: Attribute.UID &
-      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
-    custom_print_options: Attribute.Relation<
-      'api::order.order',
-      'oneToMany',
-      'api::custom-print-option.custom-print-option'
-    >;
-    status: Attribute.Enumeration<
-      [
-        '\u0412 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0435',
-        '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D',
-        '\u041E\u043F\u043B\u0430\u0447\u0435\u043D',
-        '\u0413\u043E\u0442\u043E\u0432 \u043A \u0432\u044B\u0434\u0430\u0447\u0435',
-        '\u0412 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0435',
-        '\u041F\u043E\u043B\u0443\u0447\u0435\u043D',
-        '\u041E\u0442\u043C\u0435\u043D\u0435\u043D'
-      ]
-    >;
-    userID: Attribute.UID;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::order.order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::order.order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -923,8 +772,23 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstName: Attribute.String;
     lastName: Attribute.String;
-    phone: Attribute.String;
-    company: Attribute.String;
+    uid: Attribute.UID &
+      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
+    customPrintOptions: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::custom-print-option.custom-print-option'
+    >;
+    companies: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::company.company'
+    >;
+    contacts: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::contact.contact'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -942,6 +806,278 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCalculatorCalculator extends Schema.CollectionType {
+  collectionName: 'calculators';
+  info: {
+    singularName: 'calculator';
+    pluralName: 'calculators';
+    displayName: 'Calculator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.String;
+    parameters: Attribute.Component<'calculator.parameter', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::calculator.calculator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::calculator.calculator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiChainRelationshipChainRelationship
+  extends Schema.CollectionType {
+  collectionName: 'chain_relationships';
+  info: {
+    singularName: 'chain-relationship';
+    pluralName: 'chain-relationships';
+    displayName: 'Chain Relationship';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    value: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::chain-relationship.chain-relationship',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::chain-relationship.chain-relationship',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCompanyCompany extends Schema.CollectionType {
+  collectionName: 'companies';
+  info: {
+    singularName: 'company';
+    pluralName: 'companies';
+    displayName: 'Company';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    individualTaxpayerNumber: Attribute.BigInteger;
+    codeReason: Attribute.BigInteger;
+    bankIdentificationCode: Attribute.BigInteger;
+    checkingAccount: Attribute.BigInteger;
+    correspondentAccount: Attribute.BigInteger;
+    typeContract: Attribute.Enumeration<
+      ['\u041F\u0440\u0435\u0434\u043E\u043F\u043B\u0430\u0442\u0430']
+    >;
+    userID: Attribute.BigInteger;
+    user: Attribute.Relation<
+      'api::company.company',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactContact extends Schema.CollectionType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'Contact';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    fullName: Attribute.String;
+    position: Attribute.String;
+    phone: Attribute.BigInteger;
+    userID: Attribute.BigInteger;
+    user: Attribute.Relation<
+      'api::contact.contact',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCustomPrintOptionCustomPrintOption
+  extends Schema.CollectionType {
+  collectionName: 'custom_print_options';
+  info: {
+    singularName: 'custom-print-option';
+    pluralName: 'custom-print-options';
+    displayName: 'Custom Print Option';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    calculator: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'oneToOne',
+      'api::calculator.calculator'
+    >;
+    parameters: Attribute.Component<'calculator.parameter-checked', true>;
+    user: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::custom-print-option.custom-print-option',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNavigationNavigation extends Schema.CollectionType {
+  collectionName: 'navigations';
+  info: {
+    singularName: 'navigation';
+    pluralName: 'navigations';
+    displayName: 'Navigation';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    items: Attribute.Component<'navigation.list-items', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Order';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    uuid: Attribute.UID &
+      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
+    custom_print_options: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::custom-print-option.custom-print-option'
+    >;
+    status: Attribute.Enumeration<
+      [
+        '\u0412 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0435',
+        '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D',
+        '\u041E\u043F\u043B\u0430\u0447\u0435\u043D',
+        '\u0413\u043E\u0442\u043E\u0432 \u043A \u0432\u044B\u0434\u0430\u0447\u0435',
+        '\u0412 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0435',
+        '\u041F\u043E\u043B\u0443\u0447\u0435\u043D',
+        '\u041E\u0442\u043C\u0435\u043D\u0435\u043D'
+      ]
+    >;
+    userID: Attribute.UID;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -952,10 +1088,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::calculator.calculator': ApiCalculatorCalculator;
-      'api::custom-print-option.custom-print-option': ApiCustomPrintOptionCustomPrintOption;
-      'api::navigation.navigation': ApiNavigationNavigation;
-      'api::order.order': ApiOrderOrder;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -964,6 +1096,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::calculator.calculator': ApiCalculatorCalculator;
+      'api::chain-relationship.chain-relationship': ApiChainRelationshipChainRelationship;
+      'api::company.company': ApiCompanyCompany;
+      'api::contact.contact': ApiContactContact;
+      'api::custom-print-option.custom-print-option': ApiCustomPrintOptionCustomPrintOption;
+      'api::navigation.navigation': ApiNavigationNavigation;
+      'api::order.order': ApiOrderOrder;
     }
   }
 }

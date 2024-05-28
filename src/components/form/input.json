@@ -27,11 +27,10 @@
     "price": {
       "type": "decimal"
     },
-    "relation_parent_uuid": {
-      "type": "string"
-    },
-    "relation_sibling_uuid": {
-      "type": "string"
+    "chainRelationships": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chain-relationship.chain-relationship"
     }
   }
 }

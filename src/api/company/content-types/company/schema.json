@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "companies",
+  "info": {
+    "singularName": "company",
+    "pluralName": "companies",
+    "displayName": "Company",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "individualTaxpayerNumber": {
+      "type": "biginteger"
+    },
+    "codeReason": {
+      "type": "biginteger"
+    },
+    "bankIdentificationCode": {
+      "type": "biginteger"
+    },
+    "checkingAccount": {
+      "type": "biginteger"
+    },
+    "correspondentAccount": {
+      "type": "biginteger"
+    },
+    "typeContract": {
+      "type": "enumeration",
+      "enum": [
+        "Предоплата"
+      ]
+    },
+    "userID": {
+      "type": "biginteger"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "companies"
+    }
+  }
+}

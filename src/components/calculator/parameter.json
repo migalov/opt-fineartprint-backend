@@ -16,6 +16,9 @@
       "type": "component",
       "repeatable": true,
       "component": "form.input"
+    },
+    "dependsOn": {
+      "type": "string"
     }
   }
 }
