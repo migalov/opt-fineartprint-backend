@@ -35,6 +35,33 @@
     },
     "userID": {
       "type": "uid"
+    },
+    "typeDelivery": {
+      "type": "enumeration",
+      "enum": [
+        "Доставка",
+        "Самовывоз"
+      ]
+    },
+    "city": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "house": {
+      "type": "string"
+    },
+    "partHouse": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "text"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
     }
   }
 }

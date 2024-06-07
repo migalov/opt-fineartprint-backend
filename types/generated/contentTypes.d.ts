@@ -1060,6 +1060,22 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       ]
     >;
     userID: Attribute.UID;
+    typeDelivery: Attribute.Enumeration<
+      [
+        '\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430',
+        '\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437'
+      ]
+    >;
+    city: Attribute.String;
+    street: Attribute.String;
+    house: Attribute.String;
+    partHouse: Attribute.String;
+    comment: Attribute.Text;
+    company: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'api::company.company'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1071,6 +1087,66 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestTest extends Schema.CollectionType {
+  collectionName: 'tests';
+  info: {
+    singularName: 'test';
+    pluralName: 'tests';
+    displayName: 'Test';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    value: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestFormFieldTestFormField extends Schema.CollectionType {
+  collectionName: 'test_form_fields';
+  info: {
+    singularName: 'test-form-field';
+    pluralName: 'test-form-fields';
+    displayName: 'Test Form Field';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    label: Attribute.String;
+    name: Attribute.String;
+    type: Attribute.Enumeration<
+      ['text', 'radio', 'email', 'password', 'checkbox']
+    > &
+      Attribute.DefaultTo<'text'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::test-form-field.test-form-field',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::test-form-field.test-form-field',
       'oneToOne',
       'admin::user'
     > &
@@ -1103,6 +1179,8 @@ declare module '@strapi/types' {
       'api::custom-print-option.custom-print-option': ApiCustomPrintOptionCustomPrintOption;
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::order.order': ApiOrderOrder;
+      'api::test.test': ApiTestTest;
+      'api::test-form-field.test-form-field': ApiTestFormFieldTestFormField;
     }
   }
 }

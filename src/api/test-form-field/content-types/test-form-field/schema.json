@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "test_form_fields",
+  "info": {
+    "singularName": "test-form-field",
+    "pluralName": "test-form-fields",
+    "displayName": "Test Form Field",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "radio",
+        "email",
+        "password",
+        "checkbox"
+      ],
+      "default": "text"
+    }
+  }
+}
