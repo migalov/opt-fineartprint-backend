@@ -979,6 +979,7 @@ export interface ApiCustomPrintOptionCustomPrintOption
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    documentId: Attribute.UID;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

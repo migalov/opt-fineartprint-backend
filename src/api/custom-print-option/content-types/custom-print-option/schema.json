@@ -27,6 +27,9 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "customPrintOptions"
+    },
+    "documentId": {
+      "type": "uid"
     }
   }
 }
